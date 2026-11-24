@@ -127,7 +127,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
   .stats > div:nth-child(n+4) { border-top: 1px solid var(--line); }
 }
 
-/* ---- "Created by Aarav Makhija" watermark + plain-language explainer ---- */
+/* ---- "Created by Aarov Makhija" watermark + plain-language explainer ---- */
 .made-by {
   position: fixed; z-index: 50;
   right: calc(12px + env(safe-area-inset-right, 0px));
