@@ -126,3 +126,20 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
   .stats > div:nth-child(4) { border-left: 0; }
   .stats > div:nth-child(n+4) { border-top: 1px solid var(--line); }
 }
+
+/* ---- "Created by Aarav Makhija" watermark + plain-language explainer ---- */
+.made-by {
+  position: fixed; z-index: 50;
+  right: calc(12px + env(safe-area-inset-right, 0px));
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  background: var(--ink); color: var(--bg);
+  font: 600 12.5px/1 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: 0.02em;
+  padding: 8px 12px; border-radius: 99px; text-decoration: none;
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.45); opacity: 0.92;
+}
+.made-by:hover { opacity: 1; }
+.how { border-top: 1px solid var(--line); padding-top: 16px; display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 68ch); gap: 8px 24px; }
+.how h2 { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.how p { margin: 0; font-size: 15.5px; line-height: 1.6; }
+@media (max-width: 700px) { .how { grid-template-columns: minmax(0, 1fr); } }
+@media print { .made-by { position: static; } }
