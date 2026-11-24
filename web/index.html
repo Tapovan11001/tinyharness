@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TinyHarness Playground</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Watch an AI agent loop step by step: tool calls, validation errors, approvals and budget stops.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>TinyHarness</h1>
+      <p>A small agent harness you can read in one sitting. Pick a scenario and watch the loop run: model call, tool call, result, repeat, with budgets and approvals enforced by the harness.</p>
+    </div>
+    <div class="mode" role="radiogroup" aria-label="Model">
+      <button id="mode-demo" class="seg on" role="radio" aria-checked="true">Replay</button>
+      <button id="mode-live" class="seg" role="radio" aria-checked="false">Live (your key)</button>
+    </div>
+  </header>
+
+  <div id="live-panel" class="live" hidden>
+    <label for="api-key">Anthropic API key</label>
+    <input id="api-key" type="password" autocomplete="off" placeholder="sk-ant-..." spellcheck="false">
+    <label for="model-id">Model</label>
+    <select id="model-id">
+      <option value="claude-opus-5-5">claude-opus-5-5</option>
+      <option value="claude-sonnet-5-5">claude-sonnet-5-5</option>
+      <option value="claude-haiku-5-5">claude-haiku-5-5</option>
+    </select>
+    <p class="fine">Your key stays in this tab and is sent only to api.anthropic.com. Calls are billed to your account.</p>
+  </div>
+
+  <main class="grid">
+    <section class="controls" aria-label="Scenario">
+      <h2 class="label">Scenario</h2>
+      <div id="scenarios" class="scenarios"></div>
+      <label class="label" for="prompt">Task</label>
+      <textarea id="prompt" rows="4"></textarea>
+      <div class="limits">
+        <label for="max-steps">Max model calls <output id="max-steps-out"></output></label>
+        <input id="max-steps" type="range" min="1" max="20">
+        <label for="max-repeats">Same call allowed <output id="max-repeats-out"></output></label>
+        <input id="max-repeats" type="range" min="1" max="5">
+      </div>
+      <div class="actions">
+        <button id="run" class="run">Run agent</button>
+        <button id="stop" class="ghost" disabled>Stop</button>
+      </div>
+      <p id="mode-note" class="fine"></p>
+    </section>
+
+    <section class="output" aria-label="Run">
+      <div class="stats" id="stats">
+        <div><span class="k">Status</span><span class="v" id="s-status">idle</span></div>
+        <div><span class="k">Model calls</span><span class="v" id="s-steps">0</span></div>
+        <div><span class="k">Tool calls</span><span class="v" id="s-tools">0</span></div>
+        <div><span class="k">Tokens</span><span class="v" id="s-tokens">0</span></div>
+        <div><span class="k">Time</span><span class="v" id="s-time">0 ms</span></div>
+      </div>
+      <ol id="trace" class="trace" aria-live="polite"></ol>
+      <div id="answer" class="answer" hidden>
+        <h2 class="label">Final answer</h2>
+        <div id="answer-text"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>Source, tests and evals on GitHub. Built by Aarav Makhija.</span>
+    <a id="repo-link" href="https://github.com/Tapovan11001/tinyharness" target="_blank" rel="noopener">github.com/Tapovan11001/tinyharness</a>
+  </footer>
+</div>
+<script type="module" src="./main.ts"></script>
+</body>
+</html>
